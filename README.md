@@ -1,3 +1,3 @@
-# Домашнее задание к занятию "7. Работа с HTTP"
+# Дипломное задание к курсу «Продвинутый JavaScript в браузере». Chaos Organizer
 
-## HelpDesk (backend)
+## (backend)
