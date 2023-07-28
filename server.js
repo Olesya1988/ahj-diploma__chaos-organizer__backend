@@ -19,6 +19,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.raw({type: 'image/*', limit: '10mb'}));
+
 let posts = [
   {
     id: crypto.randomUUID(),
@@ -216,6 +218,138 @@ let posts = [
     video: null,
     fileName: null,
   },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "1",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "2",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "3",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "4",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "5",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "6",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "7",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "8",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "9",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "10",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
+  {
+    id: crypto.randomUUID(),
+    name: "Олеся",
+    content: "11",
+    created: Date.now(),
+    status: false,
+    coordinates: "[55.9153, 38.1092]",
+    img: null,
+    audio: null,
+    video: null,
+    fileName: null,
+  },
 ];
 
 let users = [
@@ -321,15 +455,15 @@ app.use(async (request, response) => {
           video: createData.video,
           fileName: createData.fileName,
         };
-        const timestamp = Date.now();
-        const filename = `upload_${timestamp}`;
-        
-        const file = fs.createWriteStream(`./uploads/${filename}`);
-        request.pipe(file);
-        
-        request.on('end', () => {
-          response.send('Файл успешно загружен!');
-        });  
+             
+        fs.writeFile(`./uploads/${createData.fileName}`, `${createData.img}`, function(err) {
+          if (err)
+            console.log("Ничего не вышло, и вот почему:", err);
+          else
+            console.log("Запись успешна. Все свободны.");
+        });
+
+       
         posts.push(newPost);
         response.send(JSON.stringify(newPost)).end();
       } catch (error) {
@@ -446,6 +580,9 @@ app.use(async (request, response) => {
   }
 });
 
+
+
+
 const port = process.env.PORT || 3000;
 const bootstrap = async () => {
   try {
@@ -456,6 +593,5 @@ const bootstrap = async () => {
     console.error(error);
   }
 };
-
 
 bootstrap();
