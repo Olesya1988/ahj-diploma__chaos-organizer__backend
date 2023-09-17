@@ -455,15 +455,32 @@ app.use(async (request, response) => {
           video: createData.video,
           fileName: createData.fileName,
         };
-             
-        fs.writeFile(`./uploads/${createData.fileName}`, `${createData.img}`, function(err) {
-          if (err)
-            console.log("Ничего не вышло, и вот почему:", err);
-          else
-            console.log("Запись успешна. Все свободны.");
-        });
 
-       
+        console.log(createData);
+
+        if (createData.img) {
+          fs.writeFile(`./uploads/${createData.fileName}`, `${createData.img}`, function(err) {
+            if (err)
+              console.log("Ничего не вышло, и вот почему:", err);
+            else
+              console.log("Запись успешна. Все свободны.");
+          });
+        } else if (createData.audio) {
+          fs.writeFile(`./uploads/${createData.fileName}`, `${createData.audio}`, function(err) {
+            if (err)
+              console.log("Ничего не вышло, и вот почему:", err);
+            else
+              console.log("Запись успешна. Все свободны.");
+          });
+        } else if (createData.video) {
+          fs.writeFile(`./uploads/${createData.fileName}`, `${createData.video}`, function(err) {
+            if (err)
+              console.log("Ничего не вышло, и вот почему:", err);
+            else
+              console.log("Запись успешна. Все свободны.");
+          });
+        }
+
         posts.push(newPost);
         response.send(JSON.stringify(newPost)).end();
       } catch (error) {
